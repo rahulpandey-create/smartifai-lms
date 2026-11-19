@@ -1,24 +1,32 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "description": "LEARN LOOP LMS API (Express + MongoDB)",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "seed": "node src/seeds/seed.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
+    "@google/genai": "2.32.0",
     "bcrypt": "^6.0.0",
-    "connect-mongo": "^6.0.0",
+    "cookie-parser": "1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^18.0.10",
     "express": "^5.3.0",
     "express-rate-limit": "^8.7.4",
-    "express-session": "^1.19.0",
     "helmet": "^8.3.0",
+    "jsonwebtoken": "9.0.3",
     "mongoose": "^9.12.2",
     "zod": "^4.6.7"
   },

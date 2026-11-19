@@ -1,0 +1,14 @@
+{
+  "name": "smartifai-lms",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LEARN LOOP - Learning Management & Student Success Insights Platform",
+  "scripts": {
+    "install:all": "npm --prefix server install && npm --prefix client install",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "build:client": "npm --prefix client run build",
+    "lint:client": "npm --prefix client run lint",
+    "seed": "npm --prefix server run seed"
+  }
+}

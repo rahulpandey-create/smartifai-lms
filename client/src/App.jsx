@@ -1,122 +1,66 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react'
+import { Repeat } from 'lucide-react'
 
-function App() {
-  const [count, setCount] = useState(0)
+// Temporary Checkpoint 1 smoke test: confirms React, the Tailwind theme and the /api proxy work.
+// Replaced by the real router and layouts in Checkpoint 5.
+export default function App() {
+  const [status, setStatus] = useState({ state: 'loading' })
+
+  useEffect(() => {
+    const controller = new AbortController()
+
+    async function checkApi() {
+      try {
+        const response = await fetch('/api/health', { signal: controller.signal })
+        if (!response.ok) throw new Error(`HTTP ${response.status}`)
+        const body = await response.json()
+        setStatus({ state: 'ready', health: body.data })
+      } catch (error) {
+        if (error.name === 'AbortError') return
+        setStatus({ state: 'error', message: error.message })
+      }
+    }
+
+    checkApi()
+    return () => controller.abort()
+  }, [])
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <main className="mx-auto flex min-h-screen max-w-lg flex-col justify-center gap-6 px-6">
+      <header className="flex items-center gap-3">
+        <span className="grid size-11 place-items-center rounded-xl bg-brand-600 text-white shadow-card">
+          <Repeat className="size-6" aria-hidden="true" />
+        </span>
+        <h1 className="text-2xl font-extrabold tracking-tight text-brand-600">
+          LEARN <span className="text-accent-600">LOOP</span>
+        </h1>
+      </header>
 
-      <div className="ticks"></div>
+      <section className="rounded-card border border-line bg-surface p-6 shadow-card">
+        <h2 className="text-lg font-semibold">Foundation check</h2>
+        <p className="mt-1 text-sm text-ink-soft">React, Tailwind theme and the API proxy.</p>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+        <div className="mt-4 text-sm" role="status">
+          {status.state === 'loading' && <p className="text-ink-soft">Contacting API…</p>}
+
+          {status.state === 'error' && (
+            <p className="font-medium text-accent-600">
+              API unreachable ({status.message}). Is the server running?
+            </p>
+          )}
+
+          {status.state === 'ready' && (
+            <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-1">
+              <dt className="text-ink-soft">API</dt>
+              <dd className="font-medium">{status.health.status}</dd>
+              <dt className="text-ink-soft">Database</dt>
+              <dd className="font-medium">{status.health.db}</dd>
+              <dt className="text-ink-soft">Environment</dt>
+              <dd className="font-medium">{status.health.environment}</dd>
+            </dl>
+          )}
         </div>
       </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    </main>
   )
 }
-
-export default App
