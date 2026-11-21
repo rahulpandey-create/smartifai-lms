@@ -5,22 +5,38 @@ const app = require('./app')
 let server
 
 async function start() {
+  console.log('[debug] Starting API server...');
+  console.log('[debug] Configured port:', config.port);
+  console.log('[debug] PID:', process.pid);
+
   try {
-    await connectDB()
+    await connectDB();
+    console.log('[debug] MongoDB connection completed');
+
+    server = app.listen(config.port);
+
+    server.on('listening', () => {
+      console.log('[debug] Actual address:', server.address());
+      console.log(
+        `[server] LEARN LOOP API listening on port ${config.port} (${config.nodeEnv})`
+      );
+    });
+
+    server.on('error', (err) => {
+      console.error('[server] HTTP listener error:', err);
+    });
+
+    server.on('close', () => {
+      console.error('[server] HTTP listener closed');
+    });
+
+    server.keepAliveTimeout = 65_000;
+    server.headersTimeout = 66_000;
+
   } catch (err) {
-    // The driver's error message never includes the password from the connection string.
-    console.error(`[server] Could not connect to MongoDB: ${err.message}`)
-    console.error('[server] Check MONGODB_URI and, on Atlas, Network Access (IP allow-list).')
-    process.exit(1)
+    console.error('[server] Startup failed:', err);
+    process.exit(1);
   }
-
-  server = app.listen(config.port, () => {
-    console.log(`[server] LEARN LOOP API listening on port ${config.port} (${config.nodeEnv})`)
-  })
-
-  // Keep idle connections open longer than the proxy in front of us (Render) to avoid sporadic 502s.
-  server.keepAliveTimeout = 65_000
-  server.headersTimeout = 66_000
 }
 
 async function shutdown(signal) {
