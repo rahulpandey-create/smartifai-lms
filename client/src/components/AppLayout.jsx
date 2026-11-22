@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { BookOpen, LogOut, ShieldCheck } from 'lucide-react'
+import { BookOpen, LogOut, Moon, ShieldCheck, Sun } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 
 function navClass({ isActive }) {
@@ -9,6 +10,16 @@ function navClass({ isActive }) {
 export default function AppLayout() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem('learn-loop-theme')
+    if (saved === 'light' || saved === 'dark') return saved
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  })
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    localStorage.setItem('learn-loop-theme', theme)
+  }, [theme])
 
   async function handleLogout() {
     await logout()
@@ -29,6 +40,15 @@ export default function AppLayout() {
             {user?.role === 'admin' && (
               <NavLink to="/admin" className={navClass}><ShieldCheck size={15} /> Analytics</NavLink>
             )}
+            <button
+              className="icon-button theme-toggle"
+              onClick={() => setTheme((current) => current === 'dark' ? 'light' : 'dark')}
+              title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+              aria-pressed={theme === 'dark'}
+            >
+              {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
+            </button>
             {user ? (
               <div className="user-menu">
                 <span className="hidden text-sm font-medium text-ink-soft sm:inline">{user.name}</span>

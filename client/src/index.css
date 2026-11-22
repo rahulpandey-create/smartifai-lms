@@ -107,3 +107,86 @@
 .auth-art-orb { position: absolute; right: -105px; bottom: -90px; width: 310px; height: 310px; border: 1px solid rgb(255 255 255 / .22); border-radius: 50%; box-shadow: 0 0 0 35px rgb(255 255 255 / .06), 0 0 0 75px rgb(255 255 255 / .05); }
 @media (max-width: 760px) { .filter-panel { grid-template-columns: repeat(2, minmax(0, 1fr)); } .detail-hero { padding: 26px; } }
 @media (max-width: 480px) { .page-container { width: min(100% - 28px, 1160px); } .nav-link { padding: 8px 7px; font-size: 12px; } .filter-panel { grid-template-columns: 1fr; } .reading-card { padding: 19px; } .reading-card p { font-size: 14px; } .auth-art { min-height: 270px; padding: 24px; } }
+
+/* Lesson reading hierarchy: retain the existing warm brand, improve scanning and focus. */
+.lesson-heading { max-width: 760px; }
+.lesson-meta { display: inline-flex; align-items: center; gap: 10px; color: #9a3412; font-size: 11px; font-weight: 800; letter-spacing: .12em; }
+.lesson-meta-divider { width: 4px; height: 4px; border-radius: 50%; background: #fdba74; }
+.lesson-title { max-width: 760px; font-size: clamp(30px, 4.2vw, 42px); font-weight: 850; line-height: 1.12; letter-spacing: -.045em; }
+.lesson-intro { max-width: 650px; margin-top: 14px; color: #78716c; font-size: 14px; line-height: 1.75; }
+.lesson-reading-label { display: flex; align-items: center; gap: 10px; color: #78716c; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.lesson-reading-rule { width: 22px; height: 2px; border-radius: 2px; background: #ea580c; }
+.reading-card { max-width: 100%; padding: clamp(22px, 4vw, 34px); }
+.reading-card p { max-width: 68ch; margin-bottom: 1.35em; color: #3f3a36; font-size: 16px; line-height: 1.9; letter-spacing: .002em; }
+.lesson-progress { box-shadow: 0 4px 16px rgb(28 25 23 / .035); }
+.takeaway-list { display: grid; gap: 10px; padding: 0; list-style: none; }
+.takeaway-list li { display: grid; grid-template-columns: 28px minmax(0, 1fr); align-items: start; gap: 11px; color: #44403c; font-size: 14px; line-height: 1.7; }
+.takeaway-number { display: grid; width: 26px; height: 26px; place-items: center; border: 1px solid #fed7aa; border-radius: 9px; color: #9a3412; background: #fff1e5; font-size: 11px; font-weight: 800; }
+.theme-toggle { flex: 0 0 auto; }
+
+/* Persistent theme tokens and component surfaces. Brand orange remains the accent in both themes. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-canvas: #171614;
+  --color-surface: #211f1c;
+  --color-ink: #f5f1ec;
+  --color-ink-soft: #c0b8ae;
+  --color-line: #39342e;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / .22), 0 8px 24px -8px rgb(0 0 0 / .38);
+}
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] body,
+:root[data-theme="dark"] .bg-canvas { background: var(--color-canvas); color: var(--color-ink); }
+:root[data-theme="dark"] .app-header { background: rgb(29 27 24 / .94); }
+:root[data-theme="dark"] .brand-mark { color: #f5f1ec; }
+:root[data-theme="dark"] .nav-link { color: #c0b8ae; }
+:root[data-theme="dark"] .nav-link:hover,
+:root[data-theme="dark"] .nav-link-active { color: #fdba74; background: #38281e; }
+:root[data-theme="dark"] .icon-button,
+:root[data-theme="dark"] .button-secondary,
+:root[data-theme="dark"] .reading-card,
+:root[data-theme="dark"] .learning-card,
+:root[data-theme="dark"] .activity-card,
+:root[data-theme="dark"] .chart-card,
+:root[data-theme="dark"] .metric-card,
+:root[data-theme="dark"] .filter-panel,
+:root[data-theme="dark"] .state-panel,
+:root[data-theme="dark"] .field-input,
+:root[data-theme="dark"] .course-card,
+:root[data-theme="dark"] .lesson-progress { color: var(--color-ink); background: #211f1c; border-color: var(--color-line); }
+:root[data-theme="dark"] .reading-card p,
+:root[data-theme="dark"] .takeaway-list li { color: #e2dbd2; }
+:root[data-theme="dark"] .ai-panel { border-color: #684323; background: linear-gradient(140deg, #29221b, #302419); }
+:root[data-theme="dark"] .ai-icon,
+:root[data-theme="dark"] .takeaway-number { color: #fdba74; border-color: #684323; background: #3a2a1d; }
+:root[data-theme="dark"] .button-secondary:hover { background: #302820; }
+:root[data-theme="dark"] .field-input { color: #f5f1ec; }
+:root[data-theme="dark"] .field-label,
+:root[data-theme="dark"] .data-table td,
+:root[data-theme="dark"] .data-table td.font-semibold,
+:root[data-theme="dark"] .data-table td.font-medium { color: #e2dbd2; }
+:root[data-theme="dark"] .data-table th { color: #c0b8ae; background: #2a2723; }
+:root[data-theme="dark"] .data-table td { border-color: #39342e; }
+:root[data-theme="dark"] .progress-track,
+:root[data-theme="dark"] .funnel-track { background: #39342e; }
+:root[data-theme="dark"] .empty-state { border-color: #50483f; background: rgb(33 31 28 / .7); }
+:root[data-theme="dark"] .empty-icon { color: #c0b8ae; background: #302d28; }
+:root[data-theme="dark"] .state-error { border-color: #713737; color: #fecaca; background: #2b1d1d; }
+:root[data-theme="dark"] .state-error p { color: #fca5a5; }
+:root[data-theme="dark"] .notice-success { border-color: #245b48; color: #a7f3d0; background: #172b24; }
+:root[data-theme="dark"] footer { background: #1b1917; }
+:root[data-theme="dark"] .text-ink { color: #f5f1ec; }
+:root[data-theme="dark"] .text-ink-soft { color: #c0b8ae; }
+:root[data-theme="dark"] .border-line { border-color: #39342e; }
+:root[data-theme="dark"] .bg-white,
+:root[data-theme="dark"] .bg-white\/70 { background-color: #211f1c; }
+:root[data-theme="dark"] .text-stone-500,
+:root[data-theme="dark"] .text-stone-600,
+:root[data-theme="dark"] .text-stone-700 { color: #c0b8ae; }
+:root[data-theme="dark"] .bg-brand-50 { background-color: #38281e; }
+:root[data-theme="dark"] .text-brand-700 { color: #fdba74; }
+@media (max-width: 480px) {
+  .lesson-title { font-size: 30px; }
+  .lesson-intro { font-size: 13px; }
+  .reading-card p { font-size: 15px; line-height: 1.85; }
+}
