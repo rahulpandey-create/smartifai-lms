@@ -64,6 +64,7 @@ const envSchema = z.object({
     .optional(),
   GEMINI_API_KEY: z.string().optional(),
   GEMINI_MODEL: z.string().default("gemini-3.8-flash"),
+  GEMINI_FALLBACK_MODELS: z.string().default(""),
 });
 
 const rawEnv = Object.fromEntries(
