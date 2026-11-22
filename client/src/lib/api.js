@@ -22,7 +22,7 @@ export async function api(path, options = {}) {
       },
     })
   } catch (error) {
-    throw new ApiError('Unable to reach the LEARN LOOP API. Check that the server is running.', { details: error.message })
+    throw new ApiError('Unable to reach SMARRTIFAI Learn. Check that the server is running.', { details: error.message })
   }
 
   let body

@@ -2,18 +2,18 @@
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  --color-brand-50: #fff7ed;
-  --color-brand-100: #ffedd5;
-  --color-brand-200: #fed7aa;
-  --color-brand-300: #fdba74;
-  --color-brand-400: #fb923c;
-  --color-brand-500: #f97316;
-  --color-brand-600: #ea580c;
-  --color-brand-700: #c2410c;
-  --color-brand-800: #9a3412;
-  --color-brand-900: #7c2d12;
-  --color-brand-950: #431407;
-  --color-accent-600: #dc2626;
+  --color-brand-50: #fff1ef;
+  --color-brand-100: #ffe3df;
+  --color-brand-200: #ffc9c1;
+  --color-brand-300: #ffa79a;
+  --color-brand-400: #ff7765;
+  --color-brand-500: #f45a4f;
+  --color-brand-600: #ed3f43;
+  --color-brand-700: #cf2d3b;
+  --color-brand-800: #a92336;
+  --color-brand-900: #861d31;
+  --color-brand-950: #4f1021;
+  --color-accent-600: #f97316;
   --color-canvas: #fffaf5;
   --color-surface: #ffffff;
   --color-ink: #1c1917;
@@ -183,10 +183,126 @@
 :root[data-theme="dark"] .text-stone-500,
 :root[data-theme="dark"] .text-stone-600,
 :root[data-theme="dark"] .text-stone-700 { color: #c0b8ae; }
-:root[data-theme="dark"] .bg-brand-50 { background-color: #38281e; }
-:root[data-theme="dark"] .text-brand-700 { color: #fdba74; }
+:root[data-theme="dark"] .bg-brand-50 { background-color: #3a2225; }
+:root[data-theme="dark"] .text-brand-700 { color: #ffb9a9; }
 @media (max-width: 480px) {
   .lesson-title { font-size: 30px; }
   .lesson-intro { font-size: 13px; }
   .reading-card p { font-size: 15px; line-height: 1.85; }
+}
+
+/* SMARRTIFAI brand integration */
+.brand-mark {
+  gap: 11px;
+  flex: 0 0 auto;
+}
+.brand-wordmark {
+  display: block;
+  width: 148px;
+  height: auto;
+  object-fit: contain;
+}
+.brand-product-label {
+  border: 1px solid #ffd4cb;
+  border-radius: 7px;
+  padding: 5px 7px;
+  color: #c92c3b;
+  background: #fff4f1;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .13em;
+}
+.main-site-link {
+  white-space: nowrap;
+  border-color: #f2c9c4;
+  color: #b72b37;
+  background: #fff;
+}
+.main-site-link:hover {
+  border-color: #f18a76;
+  color: #a51f32;
+  background: #fff5f1;
+}
+.button-primary {
+  background: linear-gradient(110deg, #ed3f43 0%, #f45a2f 58%, #fa7418 100%);
+  box-shadow: 0 5px 14px rgb(239 68 68 / .18);
+}
+.button-primary:hover {
+  background: linear-gradient(110deg, #d92f3d 0%, #e94a2c 58%, #ed650f 100%);
+}
+.section-kicker { color: #d9363f; }
+.page-title span { color: #ed4240; }
+.course-visual {
+  background: linear-gradient(130deg, #e93643 0%, #f34c35 55%, #fb7918 100%);
+}
+.course-visual-1 {
+  background: linear-gradient(130deg, #a7253a 0%, #e94b39 58%, #f87924 100%);
+}
+.field-input:focus {
+  border-color: #ed4440;
+  box-shadow: 0 0 0 3px rgb(237 68 64 / .11);
+}
+.auth-art {
+  background: linear-gradient(145deg, #e93443 0%, #f14a38 52%, #fb7419 100%);
+}
+.auth-brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgb(255 255 255 / .5);
+  border-radius: 15px;
+  padding: 10px 13px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgb(111 24 27 / .12);
+  text-decoration: none;
+}
+.auth-brand-lockup img {
+  display: block;
+  width: 174px;
+  height: auto;
+}
+.auth-brand-lockup span {
+  border-radius: 7px;
+  padding: 6px 8px;
+  color: #fff;
+  background: linear-gradient(110deg, #ed3f43, #fa7418);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+.auth-overline { color: #fff1e9; }
+.auth-main-site-link {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 7px;
+  color: #c8323d;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.auth-main-site-link:hover { color: #ed5b22; }
+:root[data-theme="dark"] .main-site-link {
+  border-color: #62413b;
+  color: #ffc0a8;
+  background: #29221f;
+}
+:root[data-theme="dark"] .main-site-link:hover {
+  border-color: #a44e42;
+  color: #ffd1b6;
+  background: #362522;
+}
+:root[data-theme="dark"] .brand-product-label {
+  border-color: #70403b;
+  color: #ffb9a9;
+  background: #352321;
+}
+:root[data-theme="dark"] .auth-main-site-link { color: #ffb9a9; }
+@media (max-width: 560px) {
+  .brand-wordmark { width: 118px; }
+  .brand-mark { gap: 7px; }
+  .brand-product-label { padding: 4px 5px; font-size: 8px; }
+  .main-site-link span { display: none; }
+  .main-site-link { min-width: 34px; padding-inline: 9px; }
+  .auth-brand-lockup img { width: 150px; }
 }

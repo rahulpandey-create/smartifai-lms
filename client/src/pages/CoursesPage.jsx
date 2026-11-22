@@ -26,7 +26,7 @@ export default function CoursesPage() {
 
   return (
     <section>
-      <div className="section-kicker">LEARN LOOP / COURSE CATALOG</div>
+      <div className="section-kicker">SMARRTIFAI LEARN / COURSE CATALOG</div>
       <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
         <div><h1 className="page-title">Build skills that <span>move you forward.</span></h1><p className="page-subtitle">Explore short, structured courses and learn at your own pace.</p></div>
         <div className="rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink-soft"><strong className="text-ink">{courses.length}</strong> available courses</div>
